@@ -32,4 +32,18 @@ class PositionRepository {
         $stmt->execute([$offerId]);
         return $stmt->fetchAll(PDO::FETCH_CLASS, Position::class);
     }
+
+    public function savePosition(Position $position)
+    {
+        $stmt = $this->pdo->prepare('
+            INSERT INTO positions (offer_id, name, details, price, amount) VALUES (?, ?, ?, ?, ?);
+        ');
+        $stmt->execute([
+           $position->getOfferId(),
+           $position->getName(),
+           $position->getDetails(),
+           $position->getPrice(),
+           $position->getAmount()
+        ]);
+    }
 }

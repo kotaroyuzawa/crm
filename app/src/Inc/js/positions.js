@@ -2,17 +2,21 @@ positions = {
 
     init: function () {
         $('.new-position').on('click', function () {
-            positions.openModal();
+            positions.openModal(this);
+        })
+        $('.save-position').on('click', function () {
+            positions.save();
         })
     },
 
-    openModal: function () {
+    openModal: function (trigger) {
+        $('#offer-id').val($(trigger).data('offer'));
         $('#position-modal').modal('show');
     },
 
     save: function () {
         $.ajax({
-            url: '/position/save',
+            url: '/positions/save',
             type: 'POST',
             data: $('#position-form').serialize(),
             success: function () {

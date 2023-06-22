@@ -39,10 +39,13 @@
                                 name="position-amount"
                                 patter="[0-9]+([\.,][0-9]+)?" step="0.01">
                     </div>
+                    <div>
+                        <input type="hidden" id="offer-id" name="offer-id">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Erstellen</button>
+                <button type="button" class="btn btn-primary save-position">Erstellen</button>
             </div>
         </div>
     </div>

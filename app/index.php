@@ -30,6 +30,9 @@ $app->addRoute('/positions', 'GET', function() {
 
 $app->addRoute('/positions/save', 'POST', function() {
 
+    $positionController = new \App\Positions\PositionController();
+
+    echo $positionController->savePosition();
 });
 
 $app->run();

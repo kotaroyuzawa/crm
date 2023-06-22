@@ -22,11 +22,11 @@ class Position {
     }
 
     /**
-     * @return int
+     * @param  int $offerId
      */
-    public function setOfferId(): int
+    public function setOfferId(int $offerId): void
     {
-        return $this->offerId;
+        $this->offerId = $offerId;
     }
 
     /**
@@ -107,5 +107,10 @@ class Position {
     public function getAmount(): float
     {
         return $this->amount;
+    }
+
+    public function isNew(): bool
+    {
+        return empty($this->positionId);
     }
 }
