@@ -1,7 +1,6 @@
 <?php
 
 use App\Inc\App;
-use App\Inc\Frame;
 
 require_once 'autoloader.php';
 require_once 'config.php';
