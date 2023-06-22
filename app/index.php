@@ -28,4 +28,8 @@ $app->addRoute('/positions', 'GET', function() {
     echo Frame::render($content);
 });
 
+$app->addRoute('/positions/save', 'POST', function() {
+
+});
+
 $app->run();

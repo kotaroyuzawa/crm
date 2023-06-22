@@ -8,6 +8,17 @@ positions = {
 
     openModal: function () {
         $('#position-modal').modal('show');
+    },
+
+    save: function () {
+        $.ajax({
+            url: '/position/save',
+            type: 'POST',
+            data: $('#position-form').serialize(),
+            success: function () {
+
+            }
+        })
     }
 }
 
