@@ -7,6 +7,6 @@ const JS_PATH = 'src/Inc/js/';
 const CSS_PATH = 'src/Inc/css/';
 
 const PDO_HOST = 'db';
-const PDO_DBNAME = '';
+const PDO_DBNAME = 'crm';
 const PDO_USER = 'root';
 const PDO_PASSWORD = 'mysql';
