@@ -7,7 +7,7 @@ class Frame {
     private static FRAME $instance;
     private View $view;
     private array $jsFiles = [];
-    private array$cssFiles = [];
+    private array $cssFiles = [];
 
     private function __construct()
     {
