@@ -16,26 +16,14 @@ class Offer
     private array $positions;
     private bool $status = false;
 
- /*   public function __construct(PDO $pdo, $offerIds, $offerName, $createdAt, $deletedAt, $offerIsActive){
-        $this->pdo = Database::getConnection();
-        $this->data = $data;
-        $this->offerIds = $offerIds;
-        $this->offerName= $offerName;
-        $this->createdAt = $createdAt;
-        $this->deletedAt = $deletedAt;
-        $this->offerIsActive = $offerIsActive;
-    }
-*/
-    public function __construct(){}
-
     public function setOfferId(int $offerId): void
     {
        $this->offerId = $offerId;
     }
 
-    public function getOffer(): array
+    public function setCustomerId(int $customerId): void
     {
-        return ["tst"=>"Testi"];
+        $this->customerId = $customerId;
     }
 
 }

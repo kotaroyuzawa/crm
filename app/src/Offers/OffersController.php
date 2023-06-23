@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Offers;
-
-use App\Offers\OfferRepository;
 use App\Inc\Database;
 
 class OffersController
@@ -13,7 +11,7 @@ class OffersController
 
     }
 
-    public function renderOffers(){
+    public function render(){
         var_dump((new OfferRepository(Database::getConnection()))->getOffers());
     }
 

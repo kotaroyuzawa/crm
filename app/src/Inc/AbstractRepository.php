@@ -6,7 +6,7 @@ use PDO;
 
 abstract class AbstractRepository
 {
-    public PDO $pdo;
+    protected PDO $pdo;
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
