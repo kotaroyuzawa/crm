@@ -35,4 +35,8 @@ $app->addRoute('/positions/save', 'POST', function() {
     echo $positionController->savePosition();
 });
 
+$app->addRoute('/offers', 'GET', function() {
+    (new \App\Offers\OffersController())->renderOffers();
+});
+
 $app->run();
