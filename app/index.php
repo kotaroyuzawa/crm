@@ -35,6 +35,13 @@ $app->addRoute('/positions/save', 'POST', function() {
     echo $positionController->savePosition();
 });
 
+$app->addRoute('/positions/delete', 'POST', function() {
+
+    $positionController = new \App\Positions\PositionController();
+
+    echo $positionController->deletePosition();
+});
+
 $app->addRoute('/offers', 'GET', function() {
     (new \App\Offers\OffersController())->render();
 });

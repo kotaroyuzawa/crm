@@ -14,6 +14,8 @@ class PositionRenderer {
     private function renderAttributes(Position $position): string
     {
         $attributes = [
+            'id' => $position->getPositionId(),
+            'offer' => $position->getOfferId(),
             'name' => $position->getName(),
             'details' => $position->getDetails(),
             'price' => $position->getPrice(),
@@ -28,7 +30,7 @@ class PositionRenderer {
         return $string;
     }
 
-    private function renderPosition(Position $position): string
+    public function renderPosition(Position $position): string
     {
         return <<<HTML
 <div class="mt-2 border shadow position" {$this->renderAttributes($position)}>

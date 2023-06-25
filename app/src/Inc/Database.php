@@ -37,6 +37,11 @@ class Database {
         return self::getInstance()->getPDO();
     }
 
+    public static function getLastInsertId(): int
+    {
+        return self::getInstance()->getPDO()->lastInsertId();
+    }
+
     private static function getInstance(): Database
     {
         if (empty(self::$instance)) {

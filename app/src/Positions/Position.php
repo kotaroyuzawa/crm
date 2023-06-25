@@ -111,6 +111,6 @@ class Position {
 
     public function isNew(): bool
     {
-        return empty($this->positionId);
+        return $this->positionId === 0;
     }
 }

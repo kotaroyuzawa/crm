@@ -40,12 +40,14 @@
                                 patter="[0-9]+([\.,][0-9]+)?" step="0.01">
                     </div>
                     <div>
+                        <input type="hidden" id="position-id" name="position-id">
                         <input type="hidden" id="offer-id" name="offer-id">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary save-position">Erstellen</button>
+                <button type="button" class="btn btn-danger delete-position">Löschen</button>
+                <button type="button" class="btn btn-primary save-position">Speichern</button>
             </div>
         </div>
     </div>

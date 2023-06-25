@@ -33,7 +33,7 @@ class PositionRepository {
         return $stmt->fetchAll(PDO::FETCH_CLASS, Position::class);
     }
 
-    public function savePosition(Position $position)
+    public function savePosition(Position $position): void
     {
         $stmt = $this->pdo->prepare('
             INSERT INTO positions (offer_id, name, details, price, amount) VALUES (?, ?, ?, ?, ?);
@@ -45,5 +45,27 @@ class PositionRepository {
            $position->getPrice(),
            $position->getAmount()
         ]);
+    }
+
+    public function updatePosition(Position $position): void
+    {
+        $stmt = $this->pdo->prepare('
+            UPDATE positions SET name = ?, details = ?, price = ?, amount = ? WHERE position_id = ?
+        ');
+        $stmt->execute([
+            $position->getName(),
+            $position->getDetails(),
+            $position->getPrice(),
+            $position->getAmount(),
+            $position->getPositionId()
+        ]);
+    }
+
+    public function deletePosition(int $offerId, int $positionId): void
+    {
+        $stmt = $this->pdo->prepare('
+            DELETE FROM positions WHERE offer_id = ? AND position_id = ?
+        ');
+        $stmt->execute([$offerId, $positionId]);
     }
 }
