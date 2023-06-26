@@ -45,7 +45,7 @@ positions = {
                 } else {
                     $('#position-list').append(response.content);
                 }
-
+                $('#position-modal').modal('hide');
             }
         })
     },
@@ -61,7 +61,6 @@ positions = {
                     updatePosition.remove();
                     $('#position-modal').modal('hide');
                 }
-
             }
         })
     }
