@@ -2,6 +2,7 @@
 
 use App\Inc\App;
 use App\Inc\Frame;
+use App\Customers\CustomerController;
 
 require_once 'autoloader.php';
 require_once 'config.php';
@@ -44,6 +45,11 @@ $app->addRoute('/positions/delete', 'POST', function() {
 
 $app->addRoute('/offers', 'GET', function() {
     (new \App\Offers\OffersController())->render();
+});
+
+$app->addRoute('/customers', 'GET', function () {
+    echo "test";
+    (new CustomerController())->renderCustomer();
 });
 
 $app->run();

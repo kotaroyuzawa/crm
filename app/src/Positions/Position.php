@@ -109,6 +109,7 @@ class Position {
         return $this->amount;
     }
 
+
     public function isNew(): bool
     {
         return $this->positionId === 0;
