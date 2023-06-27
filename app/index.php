@@ -52,4 +52,8 @@ $app->addRoute('/customers', 'GET', function () {
     (new CustomerController())->renderCustomer();
 });
 
+$app->addRoute('/company', 'GET', function () {
+    echo (new \App\Company\CompanyController())->index();
+});
+
 $app->run();
