@@ -44,7 +44,7 @@ $app->addRoute('/positions/delete', 'POST', function() {
 });
 
 $app->addRoute('/offers', 'GET', function() {
-    (new \App\Offers\OffersController())->render();
+    echo (new \App\Offers\OffersController())->index();
 });
 
 $app->addRoute('/customers', 'GET', function () {
