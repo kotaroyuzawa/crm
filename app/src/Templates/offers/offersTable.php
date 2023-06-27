@@ -4,74 +4,72 @@
  * @var \App\Offers\Offer $offer
  */
 ?>
-
-<table border="1">
-    <tbody>
-    <tr>
-        <td>
-            <pre><b>Angebot ID:</b></pre>
-        </td>
-        <td>
-            <pre><b>Kunden ID:</b></pre>
-        </td>
-        <td>
-            <pre><b>Erstellt am:</b></pre>
-        </td>
-        <td>
-            <pre><b>Geloescht am:</b></pre>
-        </td>
-        <td>
-            <pre><b>Geandert am:</b></pre>
-        </td>
-        <td>
-            <pre><b>Status:</b></pre>
-        </td>
-        <td>
-            <pre><b>Kunde:</b></pre>
-        </td>
-        <td>
-            <pre><b>Firma:</b></pre>
-        </td>
-        <td>
-            <pre><b>Positionen:</b></pre>
-        </td>
-        <td>
-            <pre><b>Summe:</b></pre>
-        </td>
-    </tr>
-    <?php foreach ($offers as $offer):?>
-    <tr>
-        <td>
-            <pre><b><?=$offer->getOfferId()?></b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getCustomerId()?></b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getCreatedDate()?></b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getDeletedDate()?></b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getUpdatedDate()?></b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getStatus()?></b></pre>
-        </td>
-        <td>
-            <pre><b>PLACEHOLDER_CUSTOMER</b></pre>
-        </td>
-        <td>
-            <pre><b>PLACEHOLER_COMPANY</b></pre>
-        </td>
-        <td>
-            <pre><b>PLACEHOLDER_POSITIONS</b></pre>
-        </td>
-        <td>
-            <pre><b><?=$offer->getSum()?></b></pre>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        Angebot ID:
+                    </th>
+                    <th scope="col">
+                        Kunden ID:
+                    </th>
+                    <th scope="col">
+                        Erstellt am:
+                    </th>
+                    <th scope="col">
+                        Status:
+                    </th>
+                    <th scope="col">
+                        Kunde:
+                    </th>
+                    <th scope="col">
+                        Firma:
+                    </th>
+                    <th scope="col">
+                        Positionen:
+                    </th>
+                    <th scope="col">
+                        Summe:
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($offers as $offer):?>
+                    <tr>
+                        <td>
+                            <?=$offer->getOfferId()?>
+                        </td>
+                        <td>
+                            <?=$offer->getCustomerId()?>
+                        </td>
+                        <td>
+                            <?=$offer->getCreatedDate()?>
+                        </td>
+                        <td>
+                            <?=$offer->getStatus()?>
+                        </td>
+                        <td>
+                            <a href="http://localhost/positions">PLACEHOLDER_CUSTOMER</a>
+                        </td>
+                        <td>
+                            PLACEHOLER_COMPANY
+                        </td>
+                        <td>
+                            PLACEHOLDER_POSITIONS
+                        </td>
+                        <td>
+                            <?=$offer->getSum()?>
+                        </td>
+                        <td>
+                            <button id="<?=$offer->getOfferId()?>" type="button" class="btn btn-light new-position">Details</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

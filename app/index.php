@@ -44,7 +44,13 @@ $app->addRoute('/positions/delete', 'POST', function() {
 });
 
 $app->addRoute('/offers', 'GET', function() {
-    echo (new \App\Offers\OffersController())->index();
+    $modal = new \App\Inc\View('positions/modal');
+    $content = (new \App\Offers\OffersController())->index();
+    $content .= $modal->render([]);
+
+    Frame::addJsFile('jquery.js');
+    Frame::addJsFile('positions.js');
+    echo Frame::render($content);
 });
 
 $app->addRoute('/customers', 'GET', function () {

@@ -27,7 +27,8 @@ class OffersController
         }
     }
 
-    public function index(){
+    public function index(): string
+    {
         $offerRepository = new OfferRepository(Database::getConnection());
         $offers = $offerRepository->getOffers();
 
@@ -50,7 +51,7 @@ class OffersController
 
     public function getOfferRepo()
     {
-        return $this->offerRepository;
+       // return $this->offerRepository;
     }
 
 
