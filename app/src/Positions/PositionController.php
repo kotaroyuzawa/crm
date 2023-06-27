@@ -15,10 +15,8 @@ class PositionController {
         $positionsRenderer = new PositionRenderer();
         $positionsRenderer->addMany($positions);
 
-        $renderedPositions = $positionsRenderer->getRenderedPositions();
-
         $view = new View('positions/positionList');
-        return $view->render(['positions' => $renderedPositions, 'offerId' => $offerId]);
+        return $view->render(['positionRenderer' => $positionsRenderer, 'offerId' => $offerId]);
     }
 
     public function savePosition()

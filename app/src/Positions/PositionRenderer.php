@@ -45,13 +45,13 @@ HTML;
 
     }
 
-    public function getRenderedPositions(): array
+    public function renderList(): string
     {
-        $renderedPositions = [];
+        $list = '';
         foreach ($this->positions as $position) {
-            $renderedPositions[] = $this->renderPosition($position);
+            $list .= $this->renderPosition($position);
         }
 
-        return $renderedPositions;
+        return $list;
     }
 }
