@@ -4,6 +4,7 @@ namespace App\Company;
 
 class Company {
 
+    private int $companyId;
     private string $companyName;
     private string $companyStreet;
     private int $streetNumber;
@@ -13,6 +14,22 @@ class Company {
     private string $companyEmail;
     private string $companyPhone;
     private string $companyDescription;
+
+    /**
+     * @return int
+     */
+    public function getCompanyId(): int
+    {
+        return $this->companyId;
+    }
+
+    /**
+     * @param int $companyId
+     */
+    public function setCompanyId(int $companyId): void
+    {
+        $this->companyId = $companyId;
+    }
 
     /**
      * @param string $companyName

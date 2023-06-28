@@ -119,4 +119,9 @@ $app->addRoute('/company/save', 'POST', function () {
     $companyController->saveCompany();
 });
 
+$app->addRoute('/company', 'GET', function () {
+    $company = new \App\Inc\View('company/companyData');
+    echo Frame::render($company->render([]));
+});
+
 $app->run();

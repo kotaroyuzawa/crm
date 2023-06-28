@@ -3,16 +3,17 @@
 namespace App\Company;
 
 use App\Inc\Database;
+use App\Inc\View;
 
 class CompanyController {
 
-    public function index():string
+    public function showCompany($companyId):string
     {
         $companyRepository = new CompanyRepository(Database::getConnection());
-        $company = $companyRepository->get();
+        $company = $companyRepository->getCompany($companyId);
 
-        var_dump($company);
-        die();
+        $view = new View('company');
+        return $view->render(['company' => $company]);
     }
 
     public function saveCompany()

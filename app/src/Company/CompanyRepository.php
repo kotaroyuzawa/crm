@@ -7,32 +7,20 @@ use \PDO;
 
 class CompanyRepository extends AbstractRepository {
 
-    public function get()
+    public function getCompany(Company $company)
     {
         $stmt = $this->pdo->prepare('
-            SELECT
-                name AS companyName,
-                street AS companyStreet,
-                number AS streetNumber,
-                street-additional AS companyStreetAdditional,
-                zip AS companyZip,
-                city AS companyCity,
-                email AS companyEmail,
-                phone AS companyPhone,
-                description AS companyDescription
-            FROM
-                companies
-            WHERE
-                company_id = 1
+            SELECT * FROM companies
+            WHERE company_id = ?
         ');
-        $stmt->execute([]);
+        $stmt->execute([$company->getCompanyId()]);
         return $stmt->fetchAll(PDO::FETCH_CLASS, Company::class);
     }
 
-    public function saveCompany($company)
+    public function saveCompany(Company $company)
     {
         $stmt = $this->pdo->prepare('
-                update company set 
+                update companies set 
                     name = ?, 
                     street = ?,
                     number = ?,
@@ -45,7 +33,7 @@ class CompanyRepository extends AbstractRepository {
                 where 
                     id = 1
                 IF @@ROWCOUNT = 0
-                   insert into company(name, street, number, street-additional, zip, city, email, phone, description) 
+                   insert into companies(name, street, number, street-additional, zip, city, email, phone, description) 
                           values(?, ?, ?, ?, ?, ?, ?, ?, ?);'
         );
 
