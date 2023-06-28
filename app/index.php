@@ -50,17 +50,20 @@ $app->addRoute('/positions/delete', 'POST', function() {
 });
 
 $app->addRoute('/offers', 'GET', function() {
-    $modal = new \App\Inc\View('positions/modal');
     $content = (new \App\Offers\OffersController())->index();
-    $content .= $modal->render([]);
 
+    Frame::setActiveItem(\App\Inc\Navigator::NAV_OFFERS);
     Frame::addJsFile('jquery.js');
     Frame::addJsFile('positions.js');
     echo Frame::render($content);
 });
 
-$app->addRoute('/offers/details', 'GET', function() {
+$app->addRoute('/offers/details', 'POST', function() {
+    $modal = new \App\Inc\View('positions/modal');
     $content = (new \App\Offers\OffersController())->details();
+    $content .= $modal->render([]);
+
+
 
     Frame::addJsFile('jquery.js');
     Frame::addJsFile('positions.js');
@@ -117,11 +120,6 @@ $app->addRoute('/company', 'GET', function () {
 $app->addRoute('/company/save', 'POST', function () {
     $companyController = new \App\Company\CompanyController();
     $companyController->saveCompany();
-});
-
-$app->addRoute('/company', 'GET', function () {
-    $company = new \App\Inc\View('company/companyData');
-    echo Frame::render($company->render([]));
 });
 
 $app->run();

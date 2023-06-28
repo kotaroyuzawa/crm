@@ -25,7 +25,7 @@ class Navigator {
             ],
             'offers' => [
                 'title' => 'Angebote',
-                'link' => ''
+                'link' => 'offers'
             ],
             'company' => [
                 'title' => 'Firma',

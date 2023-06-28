@@ -2,11 +2,12 @@
 /**
  * @var array $offers
  * @var \App\Offers\Offer $offer
+ * @var array $customer
  */
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -29,9 +30,6 @@
                         Firma:
                     </th>
                     <th scope="col">
-                        Positionen:
-                    </th>
-                    <th scope="col">
                         Summe:
                     </th>
                 </tr>
@@ -52,19 +50,18 @@
                             <?=$offer->getStatus()?>
                         </td>
                         <td>
-                            <a href="http://localhost/customers">PLACEHOLDER_CUSTOMER</a>
+                            <a href="http://localhost/customers"><?=$offer->getCustomer()->getCustomerName()?></a>
                         </td>
                         <td>
                             <a href="http://localhost/company">PLACEHOLER_COMPANY</a>
                         </td>
                         <td>
-                            <a href="http://localhost/positions">PLACEHOLDER_POSITIONS</a>
-                        </td>
-                        <td>
                             <?=$offer->getSum()?>
                         </td>
                         <td>
-                            <button id="<?=$offer->getOfferId()?>" type="button" class="btn btn-light new-position">Details</button>
+                            <form action="offers/details" method="POST">
+                                <button value="<?=$offer->getOfferId()?>" type="submit" name="offerID" class="btn btn-light">Details</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>

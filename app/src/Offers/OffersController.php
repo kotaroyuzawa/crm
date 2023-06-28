@@ -2,6 +2,9 @@
 
 namespace App\Offers;
 
+use App\Company\CompanyRepository;
+use App\Customers\Customer;
+use App\Customers\CustomerRepository;
 use App\Inc\Database;
 use App\Inc\View;
 use App\Positions\PositionRenderer;
@@ -30,8 +33,16 @@ class OffersController
     public function index(): string
     {
         $offerRepository = new OfferRepository(Database::getConnection());
-        $offers = $offerRepository->getOffers();
+        $customerRepostitory = new CustomerRepository(Database::getConnection());
+        $companyRepository = new CompanyRepository(Database::getConnection());
 
+        $offers = $offerRepository->getOffers();
+        //$customer = $customerRepostitory->getCustomerById(2);
+        $customer = new Customer();
+        $customer->setCustomerName('Klaus Dieter');
+        foreach ($offers as $offer){
+            $offer->setCustomer($customer);
+        }
 
         $view = new View('offers/offersTable');
         return $view->render(['offers' => $offers]);
@@ -40,10 +51,18 @@ class OffersController
     public function details(): string
     {
         $offerRepository = new OfferRepository(Database::getConnection());
-        $offers = $offerRepository->getOffers();
+        $positionRepository = new PositionRepository(Database::getConnection());
+        $positionRenderer = new PositionRenderer();
+
+
+        $offer = $offerRepository->getOfferById($_POST['offerID']);
+        $positions = $positionRepository->getPositionsByOffer($offer->getOfferId());
+
+        $positionRenderer->addMany($positions);
+
 
         $view = new View('offers/offersDetails');
-        return $view->render(['offers' => $offers]);
+        return $view->render(['offer' => $offer, 'positionRenderer' => $positionRenderer]);
     }
 
 

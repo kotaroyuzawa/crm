@@ -27,7 +27,7 @@ class OfferRepository extends AbstractRepository
         return  $stmt->fetchAll(PDO::FETCH_CLASS, Offer::class);
     }
 
-    public function getOfferById(int $offerId): array
+    public function getOfferById(int $offerId): Offer
     {
         $stmt = $this->pdo->prepare('
             SELECT 
@@ -45,7 +45,7 @@ class OfferRepository extends AbstractRepository
         ');
 
         $stmt->execute([$offerId]);
-        return  $stmt->fetchAll(PDO::FETCH_CLASS, Offer::class);
+        return  $stmt->fetchObject(Offer::class);
     }
 
     public function updatePosition(Offer $offer): void
