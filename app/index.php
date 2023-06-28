@@ -62,4 +62,9 @@ $app->addRoute('/company', 'GET', function () {
     echo (new \App\Company\CompanyController())->index();
 });
 
+$app->addRoute('/company/save', 'POST', function () {
+    $companyController = new \App\Company\CompanyController();
+    $companyController->saveCompany();
+});
+
 $app->run();
