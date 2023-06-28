@@ -54,8 +54,43 @@ $app->addRoute('/offers', 'GET', function() {
 });
 
 $app->addRoute('/customers', 'GET', function () {
-    echo "test";
-    (new CustomerController())->renderCustomer();
+
+    $customerController = new CustomerController();
+    $customers = $customerController->renderCustomer();
+    $customerTable = new \App\Inc\View('customers/customerTable');
+    Frame::addCssFile('customer.css');
+    echo Frame::render($customerTable->render(['allCustomers' =>$customers]));
+    //require_once '/crm/app/src/Templates/customers/customerTable.php';
+});
+
+$app->addRoute('/customers/add', 'GET', function() {
+    $form = new \App\Inc\View('customers/addCustomer');
+    echo Frame::render($form->render(['customers/addCustomer' => $form]));
+});
+
+$app->addRoute('/customers/add', 'POST', function() {
+    $customerController = new CustomerController();
+    $customerController->saveCustomer();
+    header('Location: /customers');
+});
+
+$app->addRoute('/customers/delete', 'POST', function() {
+    $customerController = new CustomerController();
+    $customerController->deleteCustomer();
+    header('Location: /customers');
+});
+
+$app->addRoute('/customers/update', 'POST', function() {
+    $customerController = new CustomerController();
+    $customer = $customerController->getCustomerById();
+    $updateCustomer = new \App\Inc\View('customers/updateCustomer');
+    echo Frame::render($updateCustomer->render(['customer' => $customer]));
+});
+
+$app->addRoute('/customers/updateSave', 'POST', function() {
+    $customerController = new CustomerController();
+    $customerController->updateCustomer();
+    header('Location: /customers');
 });
 
 $app->addRoute('/company', 'GET', function () {
