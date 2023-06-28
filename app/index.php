@@ -15,6 +15,12 @@ $app->addRoute('URL', 'METHOD', function() {
 });
 */
 
+$app->addRoute('/', 'GET', function() {
+
+    Frame::setActiveItem(\App\Inc\Navigator::NAV_CUSTOMERS);
+    echo Frame::render('content');
+});
+
 $app->addRoute('/positions', 'GET', function() {
 
     $offerId = 1;

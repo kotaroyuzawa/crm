@@ -6,12 +6,14 @@ class Frame {
 
     private static FRAME $instance;
     private View $view;
+    private Navigator $navigator;
     private array $jsFiles = [];
     private array $cssFiles = [];
 
     private function __construct()
     {
         $this->view = new View('frame');
+        $this->navigator = new Navigator();
     }
 
     public static function addJsFile(string $filename): void
@@ -24,6 +26,11 @@ class Frame {
         self::getInstance()->addCss($filename);
     }
 
+    public static function setActiveItem(string $item): void
+    {
+        self::getInstance()->setNavigatorItem($item);
+    }
+
     public static function render(string $content): string
     {
         return self::getInstance()->renderView($content);
@@ -33,7 +40,8 @@ class Frame {
     {
         return $this->view->render([
             'files' => $this->getFiles(),
-            'content' => $content
+            'content' => $content,
+            'navigator' => $this->navigator
         ]);
     }
 
@@ -62,6 +70,11 @@ class Frame {
     private function addCss(string $filename): void
     {
         $this->cssFiles[] = $filename;
+    }
+
+    private function setNavigatorItem(string $item): void
+    {
+        $this->navigator->setItemActive($item);
     }
 
     private static function getInstance(): Frame
