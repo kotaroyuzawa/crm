@@ -59,6 +59,16 @@ $app->addRoute('/offers', 'GET', function() {
     echo Frame::render($content);
 });
 
+$app->addRoute('/offers/details', 'GET', function() {
+    $content = (new \App\Offers\OffersController())->details();
+
+    Frame::addJsFile('jquery.js');
+    Frame::addJsFile('positions.js');
+    echo Frame::render($content);
+});
+
+
+
 $app->addRoute('/customers', 'GET', function () {
 
     $customerController = new CustomerController();

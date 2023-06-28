@@ -37,6 +37,15 @@ class OffersController
         return $view->render(['offers' => $offers]);
     }
 
+    public function details(): string
+    {
+        $offerRepository = new OfferRepository(Database::getConnection());
+        $offers = $offerRepository->getOffers();
+
+        $view = new View('offers/offersDetails');
+        return $view->render(['offers' => $offers]);
+    }
+
 
 
     public function setCompany()
