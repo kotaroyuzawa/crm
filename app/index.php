@@ -64,7 +64,8 @@ $app->addRoute('/customers', 'GET', function () {
     $customerController = new CustomerController();
     $customers = $customerController->renderCustomer();
     $customerTable = new \App\Inc\View('customers/customerTable');
-    Frame::addCssFile('customer.css');
+//    Frame::addCssFile('customer.css');
+    Frame::setActiveItem(\App\Inc\Navigator::NAV_CUSTOMERS);
     echo Frame::render($customerTable->render(['allCustomers' =>$customers]));
     //require_once '/crm/app/src/Templates/customers/customerTable.php';
 });

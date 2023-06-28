@@ -26,12 +26,12 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-8 p-2">
+        <div class="col-10 p-2">
             <div class="rounded shadow bg-white">
                 <?= $content ?>
             </div>
         </div>
-        <div class="col-4 p-2 ">
+        <div class="col-2 p-2 ">
             <div class="rounded shadow bg-white sticky-top">
                 <?= $navigator->render() ?>
             </div>
