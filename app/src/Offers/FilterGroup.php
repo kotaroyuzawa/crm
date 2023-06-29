@@ -20,9 +20,25 @@ class FilterGroup {
         }
 
         //customer
-        $customer = $_POST['ff-customer'];
+        $customer = $_POST['ff-customer'] ?? null;
         if (!empty($customer) && is_numeric($customer)) {
             $this->addFilter('customer_id = ?', [$customer]);
+        }
+
+        //from
+        $from = $_POST['ff-from'] ?? null;
+        if (!empty($from)) {
+            $date = date_create($from);
+            $date = date_format($date,"Y-m-d");
+            $this->addFilter('created_at >= ?', [$date]);
+        }
+
+        //from
+        $to = $_POST['ff-to'] ?? null;
+        if (!empty($to)) {
+            $date = date_create($to);
+            $date = date_format($date,"Y-m-d");
+            $this->addFilter('created_at <= ?', [$date]);
         }
     }
 

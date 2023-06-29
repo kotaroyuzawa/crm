@@ -33,35 +33,27 @@ class OffersController
     public function index(): string
     {
         $offerRepository = new OfferRepository(Database::getConnection());
-        $customerRepostitory = new CustomerRepository(Database::getConnection());
+        $customerRepository = new CustomerRepository(Database::getConnection());
         $companyRepository = new CompanyRepository(Database::getConnection());
 
-        $entries = $customerRepostitory->getAllCustomers();
-        $customers = [];
+        $customers = $customerRepository->getAllCustomers();
 
-        foreach ($entries as $entry){
-            $customers[$entry->getCustomerId()] = $entry;
-        }
-
-
-        /**
-         * @var Offer $offer
-         */
-        $offers = $offerRepository->getOffers();
-
-        foreach ($offers as $offer){
-            $offer->setCustomer($customers[$offer->getCustomerId()]);
-        }
+        $offers = $this->mapCustomers($offerRepository->getOffers(), $customers);
 
         $filterFields = (new View('offers/offersFilter'))->render(['customers' => $customers]);
 
+        $table = new OffersTable();
+        $table->addMany($offers);
+
         $view = new View('offers/offersTable');
-        return $view->render(['offers' => $offers, 'filters' => $filterFields]);
+        return $view->render(['filters' => $filterFields, 'table' => $table]);
     }
 
     public function getFilteredIndex()
     {
         $offerRepository = new OfferRepository(Database::getConnection());
+        $customerRepository = new CustomerRepository(Database::getConnection());
+
         $offerRepository->initQueryBuilder();
 
         $filterGroup = new \App\Offers\FilterGroup();
@@ -69,16 +61,13 @@ class OffersController
             $offerRepository->setFilter($filter);
         }
 
-        $offers = $offerRepository->getObjects();
+        $offers = $this->mapCustomers($offerRepository->getObjects(), $customerRepository->getAllCustomers());
 
-        $customer = new Customer();
-        $customer->setCustomerName('Klaus Dieter');
-        foreach ($offers as $offer){
-            $offer->setCustomer($customer);
-        }
+        $table = new OffersTable();
+        $table->addMany($offers);
 
-        $view = new View('offers/offersTable');
-        return $view->render(['offers' => $offers, 'filters' => '']);
+        $view = new View('json');
+        return $view->render(['table' => $table->render()]);
     }
 
     public function details(): string
@@ -114,6 +103,21 @@ class OffersController
     public function saveOffer()
     {
         return header('Location: /offers');
+    }
+
+    private function mapCustomers(array $offers, array $customers): array
+    {
+        $customersMap = [];
+
+        foreach ($customers as $entry){
+            $customersMap[$entry->getCustomerId()] = $entry;
+        }
+
+        foreach ($offers as $offer){
+            $offer->setCustomer($customersMap[$offer->getCustomerId()]);
+        }
+
+        return $offers;
     }
 
 

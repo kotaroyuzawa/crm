@@ -54,13 +54,14 @@ $app->addRoute('/offers', 'GET', function() {
 
     Frame::setActiveItem(\App\Inc\Navigator::NAV_OFFERS);
     Frame::addJsFile('jquery.js');
+    Frame::addJsFile('jquery-ui.js');
+    Frame::addJsFile('offers.js');
     Frame::addJsFile('positions.js');
     echo Frame::render($content);
 });
 
-$app->addRoute('/offers', 'POST', function() {
-    $content = (new \App\Offers\OffersController())->getFilteredIndex();
-    echo Frame::render($content);
+$app->addRoute('/offers/filter', 'POST', function() {
+    echo (new \App\Offers\OffersController())->getFilteredIndex();
 });
 
 $app->addRoute('/offers/details', 'POST', function() {

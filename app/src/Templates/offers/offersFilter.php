@@ -4,7 +4,7 @@
  * @var \App\Customers\Customer $customer
  */
 ?>
-<form action="offers" method="POST">
+<form id="offer-filter-form">
     <div class="row border mt-2">
         <div class="col-2">
             <div class="mb-3">
@@ -37,7 +37,7 @@
         </div>
         <div class="col-2">
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mt-4">Suchen</button>
+                <button type="button" class="btn btn-primary mt-4 apply-filters">Suchen</button>
             </div>
         </div>
     </div>
