@@ -37,7 +37,31 @@ class OffersController
         $companyRepository = new CompanyRepository(Database::getConnection());
 
         $offers = $offerRepository->getOffers();
-        //$customer = $customerRepostitory->getCustomerById(2);
+        $customers = $customerRepostitory->getAllCustomers();
+        $customer = new Customer();
+        $customer->setCustomerName('Klaus Dieter');
+        foreach ($offers as $offer){
+            $offer->setCustomer($customer);
+        }
+
+        $filterFields = (new View('offers/offersFilter'))->render(['customers' => $customers]);
+
+        $view = new View('offers/offersTable');
+        return $view->render(['offers' => $offers, 'filters' => $filterFields]);
+    }
+
+    public function getFilteredIndex()
+    {
+        $offerRepository = new OfferRepository(Database::getConnection());
+        $offerRepository->initQueryBuilder();
+
+        $filterGroup = new \App\Offers\FilterGroup();
+        foreach ($filterGroup->getFilters() as $filter) {
+            $offerRepository->setFilter($filter);
+        }
+
+        $offers = $offerRepository->getObjects();
+
         $customer = new Customer();
         $customer->setCustomerName('Klaus Dieter');
         foreach ($offers as $offer){
@@ -45,7 +69,7 @@ class OffersController
         }
 
         $view = new View('offers/offersTable');
-        return $view->render(['offers' => $offers]);
+        return $view->render(['offers' => $offers, 'filters' => '']);
     }
 
     public function details(): string

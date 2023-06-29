@@ -1,11 +1,13 @@
 <?php
 /**
+ * @var string $filters;
  * @var array $offers
  * @var \App\Offers\Offer $offer
  * @var array $customer
  */
 ?>
 <div class="container">
+    <?= $filters ?>
     <div class="row">
         <div class="">
             <table class="table table-striped">

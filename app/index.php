@@ -58,6 +58,11 @@ $app->addRoute('/offers', 'GET', function() {
     echo Frame::render($content);
 });
 
+$app->addRoute('/offers', 'POST', function() {
+    $content = (new \App\Offers\OffersController())->getFilteredIndex();
+    echo Frame::render($content);
+});
+
 $app->addRoute('/offers/details', 'POST', function() {
     $modal = new \App\Inc\View('positions/modal');
     $content = (new \App\Offers\OffersController())->details();
@@ -128,6 +133,27 @@ $app->addRoute('/company', 'GET', function () {
 $app->addRoute('/company/save', 'POST', function () {
     $companyController = new \App\Company\CompanyController();
     $companyController->saveCompany();
+});
+
+$app->addRoute('/sql', 'GET', function () {
+
+    $builder = (new \App\Inc\QueryBuilder(\App\Inc\Database::getConnection()))
+        ->table('positions')
+        ->select([
+            'position_id AS positionId',
+            'offer_id AS offerId',
+            'name',
+            'details',
+            'price',
+            'amount'
+        ])
+        ->addWhere('offer_id = ?', [2]);
+
+    $result = $builder
+        ->addWhere('price >= ?', [500])
+        ->getObjects(\App\Positions\Position::class);
+
+    var_dump($result);
 });
 
 $app->run();

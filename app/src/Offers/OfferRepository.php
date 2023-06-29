@@ -3,10 +3,27 @@
 namespace App\Offers;
 
 use App\Inc\AbstractRepository;
+use App\Inc\QueryBuilder;
 use PDO;
 
 class OfferRepository extends AbstractRepository
 {
+    private QueryBuilder $queryBuilder;
+
+    public function initQueryBuilder(): void
+    {
+        $this->queryBuilder = (new QueryBuilder($this->pdo))
+            ->table('offers')
+            ->select([
+                'offer_id AS offerId',
+                'customer_id AS customerId',
+                'created_at AS createdAt',
+                'deleted_at AS deletedAt',
+                'updated_at AS updatedAt',
+                'status AS status',
+                'sum AS sum'
+            ]);
+    }
 
     public function getOffers(): array
     {
@@ -86,5 +103,15 @@ class OfferRepository extends AbstractRepository
 
         $stmt->execute();
         return  $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function setFilter(Filter $filter): void
+    {
+        $this->queryBuilder->addWhere($filter->getWhere(), $filter->getParams());
+    }
+
+    public function getObjects()
+    {
+        return $this->queryBuilder->getObjects(Offer::class);
     }
 }
