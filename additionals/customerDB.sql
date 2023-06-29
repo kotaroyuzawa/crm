@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Erstellungszeit: 26. Jun 2023 um 06:06
+-- Erstellungszeit: 29. Jun 2023 um 08:45
 -- Server-Version: 11.0.2-MariaDB-1:11.0.2+maria~ubu2204
 -- PHP-Version: 8.1.17
 
@@ -32,7 +32,8 @@ CREATE TABLE `customers` (
                              `customerName` varchar(30) NOT NULL,
                              `customerStreet` varchar(50) NOT NULL,
                              `customerStreetNr` int(5) NOT NULL,
-                             `customerStreetAdditional` varchar(30) NOT NULL,
+                             `customerStreetAdditional` varchar(30) DEFAULT NULL,
+                             `customerZip` int(6) NOT NULL,
                              `customerCity` varchar(30) NOT NULL,
                              `customerEmail` varchar(50) NOT NULL,
                              `customerPhone` varchar(20) NOT NULL
@@ -42,9 +43,12 @@ CREATE TABLE `customers` (
 -- Daten für Tabelle `customers`
 --
 
-INSERT INTO `customers` (`customerId`, `customerName`, `customerStreet`, `customerStreetNr`, `customerStreetAdditional`, `customerCity`, `customerEmail`, `customerPhone`) VALUES
-                                                                                                                                                                               (1, 'customer1name', 'customer1Street', 1, 'customer1Additional', 'customer1Citzy', 'customer1Email', '0401111111'),
-                                                                                                                                                                               (2, 'customer2Name', 'customer2Street', 2, 'customer2Additional', 'customer2City', 'customer2Email', '0402222222');
+INSERT INTO `customers` (`customerId`, `customerName`, `customerStreet`, `customerStreetNr`, `customerStreetAdditional`, `customerZip`, `customerCity`, `customerEmail`, `customerPhone`) VALUES
+                                                                                                                                                                                              (1, 'Max Mustermann', 'Bismarkstraße', 37, 'additional', 20554, 'Hamburg', 'mustermann@gmail.com', '0403827893'),
+                                                                                                                                                                                              (2, 'Jonas Schmidt', 'Hafenstraße', 31, 'c/o Müller', 20212, 'Hamburg', 'schmidt@hotmail.com', '01569230234'),
+                                                                                                                                                                                              (3, 'Kotaro Yuzawa', 'Hohenzollernring', 142, 'bei Schmidt', 20702, 'Hamburg', 'ktr.yzw@gmail.com', '017626121463'),
+                                                                                                                                                                                              (5, 'Thomas Müller', 'Georg-Wilheml-Straße', 15, '', 20594, 'Hamburg', 't.mueller@gmail.com', '0404021492'),
+                                                                                                                                                                                              (8, 'Daniel Müller', 'Burmesterstraße ', 25, '', 22305, 'Hamburg', 'muellerdaniel@gmail.com', '01756270292');
 
 --
 -- Indizes der exportierten Tabellen
@@ -64,7 +68,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT für Tabelle `customers`
 --
 ALTER TABLE `customers`
-    MODIFY `customerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `customerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
