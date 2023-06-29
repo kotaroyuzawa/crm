@@ -11,6 +11,17 @@ class PositionRenderer {
         $this->positions = $positions;
     }
 
+    private function renderPrice(float $price): string
+    {
+        return number_format($price, 2, ',', '.') . '€';
+    }
+
+    private function renderSum(Position $position): string
+    {
+        $sum = $position->getAmount() * $position->getPrice();
+        return $this->renderPrice($sum);
+    }
+
     private function renderAttributes(Position $position): string
     {
         $attributes = [
@@ -33,13 +44,17 @@ class PositionRenderer {
     public function renderPosition(Position $position): string
     {
         return <<<HTML
-<div class="mt-2 border shadow position" {$this->renderAttributes($position)}>
-    <p>PositionsId: {$position->getPositionId()}</p>
-    <p>Angebotsnummer: {$position->getOfferId()}</p>
-    <p>Überschrift: {$position->getName()} </p>
-    <p>Details: {$position->getDetails()} </p>
-    <p>Preis: {$position->getPrice()}</p>
-    <p>Anzahl: {$position->getAmount()}x</p>
+<div class="mt-2 border position p-2" {$this->renderAttributes($position)}>
+    <div class="row">
+        <div class="col-8">
+            <h3>{$position->getName()}</h3>
+            <p>Details: {$position->getDetails()} </p>
+        </div>
+        <div class="col-4 text-end">
+            <h4>{$this->renderSum($position)}</h4>
+            <p>{$position->getAmount()} x {$this->renderPrice($position->getPrice())}</p>
+        </div>
+    </div>
 </div>
 HTML;
 
