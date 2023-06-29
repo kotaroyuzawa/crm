@@ -11,13 +11,13 @@ class CustomerController
         $this->customerRepo = new CustomerRepository(Database::getConnection());
         }
 
-    public function renderCustomer(): mixed
+    public function renderCustomer(): array
     {
 
         return $this->customerRepo->getAllCustomers();
     }
 
-    public function getCustomerById(): array
+    public function getCustomerById(): Customer
     {
         $customerId = $_POST['customerId'];
         return $this->customerRepo->getCustomerById($customerId);
@@ -30,7 +30,8 @@ class CustomerController
         $customerName = $_POST['customerName'];
         $customerStreet = $_POST['customerStreet'];
         $customerStreetNr = $_POST['customerStreetNr'];
-        $customerStreetAdditional = $_POST['customerStreetAdditional'];
+        $customerStreetAdditional = $_POST['customerStreetAdditional'] ?? null;
+        $customerZip = $_POST['customerZip'];
         $customerCity = $_POST['customerCity'];
         $customerEmail =$_POST['customerEmail'];
         $customerPhone = $_POST['customerPhone'];
@@ -40,6 +41,7 @@ class CustomerController
         $customer->setCustomerStreet($customerStreet);
         $customer->setCustomerStreetNr($customerStreetNr);
         $customer->setCustomerStreetAdditional($customerStreetAdditional);
+        $customer->setCustomerZip($customerZip);
         $customer->setCustomerCity($customerCity);
         $customer->setCustomerEmail($customerEmail);
         $customer->setCustomerPhone($customerPhone);
@@ -63,7 +65,8 @@ class CustomerController
          $customerName = $_POST['customerName'];
          $customerStreet = $_POST['customerStreet'];
          $customerStreetNr = $_POST['customerStreetNr'];
-         $customerStreetAdditional = $_POST['customerStreetAdditional'];
+         $customerStreetAdditional = $_POST['customerStreetAdditional'] ?? null;
+         $customerZip = $_POST['customerZip'];
          $customerCity = $_POST['customerCity'];
          $customerEmail =$_POST['customerEmail'];
          $customerPhone = $_POST['customerPhone'];
@@ -74,6 +77,7 @@ class CustomerController
          $customer->setCustomerStreet($customerStreet);
          $customer->setCustomerStreetNr($customerStreetNr);
          $customer->setCustomerStreetAdditional($customerStreetAdditional);
+         $customer->setCustomerZip($customerZip);
          $customer->setCustomerCity($customerCity);
          $customer->setCustomerEmail($customerEmail);
          $customer->setCustomerPhone($customerPhone);

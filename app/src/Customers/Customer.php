@@ -10,6 +10,7 @@ class Customer
     private string $customerStreet;
     private int $customerStreetNr;
     private string $customerStreetAdditional;
+    private int $customerZip;
     private string $customerCity;
     private string $customerEmail;
     private string $customerPhone;
@@ -92,6 +93,21 @@ class Customer
     public function setCustomerStreetAdditional(string $customerStreetAdditional): void
     {
         $this->customerStreetAdditional = $customerStreetAdditional;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerZip(): int
+    {
+        return $this->customerZip;
+    }
+    /**
+     * @param int $customerZip
+     */
+    public function setCustomerZip(int $customerZip)
+    {
+        $this->customerZip = $customerZip;
     }
 
     /**

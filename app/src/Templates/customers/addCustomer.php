@@ -1,3 +1,4 @@
+<h1>New Customer</h1>
 <form action="/customers/add" method="post">
     <div class="form-group">
         <label for="customerName">Customer Name</label>
@@ -14,6 +15,10 @@
     <div class="form-group">
         <label for="customerStreetAdditional">Customer Street Additional</label>
         <input type="text" class="form-control" name="customerStreetAdditional" id="customerStreetAdditional">
+    </div>
+    <div class="form-group">
+        <label for="customerZip">Customer Zip</label>
+        <input type="text" class="form-control" name="customerZip" id="customerZip" pattern="[0-9]*" required>
     </div>
     <div class="form-group">
         <label for="customerCity">Customer City</label>

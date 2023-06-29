@@ -113,6 +113,14 @@ $app->addRoute('/customers/updateSave', 'POST', function() {
     header('Location: /customers');
 });
 
+$app->addRoute('/customers/detail', 'GET', function() {
+    $customerId = 1;
+    $customerRepo = new \App\Customers\CustomerRepository(\App\Inc\Database::getConnection());
+    $customerById = $customerRepo->getCustomerById($customerId);
+    $customerDetail = new \App\Inc\View('customers/customerDetail');
+    echo Frame::render($customerDetail->render(['customer' => $customerById]));
+});
+
 $app->addRoute('/company', 'GET', function () {
     echo (new \App\Company\CompanyController())->index();
 });
