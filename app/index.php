@@ -65,14 +65,25 @@ $app->addRoute('/offers', 'POST', function() {
 
 $app->addRoute('/offers/details', 'POST', function() {
     $modal = new \App\Inc\View('positions/modal');
+
     $content = (new \App\Offers\OffersController())->details();
     $content .= $modal->render([]);
-
-
 
     Frame::addJsFile('jquery.js');
     Frame::addJsFile('positions.js');
     echo Frame::render($content);
+});
+
+$app->addRoute('/offers/delete', 'POST', function() {
+    $offersController = new \App\Offers\OffersController();
+
+    echo $offersController->deleteOffer();
+});
+
+$app->addRoute('/offers/save', 'POST', function() {
+    $offersController = new \App\Offers\OffersController();
+
+    echo $offersController->saveOffer();
 });
 
 

@@ -65,7 +65,7 @@ class OfferRepository extends AbstractRepository
         return  $stmt->fetchObject(Offer::class);
     }
 
-    public function updatePosition(Offer $offer): void
+    public function updateOffer(Offer $offer): void
     {
         $stmt = $this->pdo->prepare('
             UPDATE offers SET customer_id = ?, created_at = ?, deleted_at = ?, updated_at = ?, status = ?, sum = ?, positions = ? WHERE offer_id = ?
@@ -83,13 +83,13 @@ class OfferRepository extends AbstractRepository
         ]);
     }
 
-    public function deletePosition(int $offerId, int $customerId): void
+    public function deleteOffer(int $offerId): void
     {
         $stmt = $this->pdo->prepare('
-            DELETE FROM offers WHERE offer_id = ? AND customer_id = ?
+            DELETE FROM offers WHERE offer_id = ?
         ');
 
-        $stmt->execute([$offerId, $customerId]);
+        $stmt->execute([$offerId]);
     }
 
     public function getOfferIds(): array

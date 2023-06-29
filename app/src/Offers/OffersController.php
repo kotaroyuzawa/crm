@@ -36,12 +36,21 @@ class OffersController
         $customerRepostitory = new CustomerRepository(Database::getConnection());
         $companyRepository = new CompanyRepository(Database::getConnection());
 
+        $entries = $customerRepostitory->getAllCustomers();
+        $customers = [];
+
+        foreach ($entries as $entry){
+            $customers[$entry->getCustomerId()] = $entry;
+        }
+
+
+        /**
+         * @var Offer $offer
+         */
         $offers = $offerRepository->getOffers();
-        $customers = $customerRepostitory->getAllCustomers();
-        $customer = new Customer();
-        $customer->setCustomerName('Klaus Dieter');
+
         foreach ($offers as $offer){
-            $offer->setCustomer($customer);
+            $offer->setCustomer($customers[$offer->getCustomerId()]);
         }
 
         $filterFields = (new View('offers/offersFilter'))->render(['customers' => $customers]);
@@ -75,18 +84,36 @@ class OffersController
     public function details(): string
     {
         $offerRepository = new OfferRepository(Database::getConnection());
+        $customerRepository = new CustomerRepository(Database::getConnection());
         $positionRepository = new PositionRepository(Database::getConnection());
         $positionRenderer = new PositionRenderer();
 
 
         $offer = $offerRepository->getOfferById($_POST['offerID']);
+        $customer = $customerRepository->getCustomerById($offer->getCustomerId());
+        $offer->setCustomer($customer);
         $positions = $positionRepository->getPositionsByOffer($offer->getOfferId());
 
         $positionRenderer->addMany($positions);
 
-
+        $view = new View('customers/customerDetail');
+        $customerInfo = $view->render(['customer'=>$offer->getCustomer()]);
         $view = new View('offers/offersDetails');
-        return $view->render(['offer' => $offer, 'positionRenderer' => $positionRenderer]);
+        return $view->render(['offer' => $offer, 'customerInfo' => $customerInfo, 'positionRenderer' => $positionRenderer]);
+    }
+
+    public function deleteOffer()
+    {
+        if(!empty($_POST['deleteOffer'])){
+            $offerRepository = new OfferRepository(Database::getConnection());
+            $offerRepository->deleteOffer($_POST['deleteOffer']);
+        }
+        return header('Location: /offers');
+    }
+
+    public function saveOffer()
+    {
+        return header('Location: /offers');
     }
 
 
