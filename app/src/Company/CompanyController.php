@@ -49,7 +49,7 @@ class CompanyController {
         $company->setCompanyDescription($companyDescription);
 
         $companyRepository = new CompanyRepository(Database::getConnection());
-        $companyRepository->saveCompany($company);
-        //$companyRepository->updateCompany($company);
+        //$companyRepository->saveCompany($company);
+        $companyRepository->updateCompany($company);
     }
 }
