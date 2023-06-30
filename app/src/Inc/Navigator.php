@@ -29,7 +29,7 @@ class Navigator {
             ],
             'company' => [
                 'title' => 'Firma',
-                'link' => '',
+                'link' => 'company',
             ],
             'logout' => [
                 'title' => 'Logout',
