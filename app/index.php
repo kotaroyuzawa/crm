@@ -142,9 +142,27 @@ $app->addRoute('/company', 'GET', function () {
     echo (new \App\Company\CompanyController())->index();
 });
 
-$app->addRoute('/company/save', 'POST', function () {
+$app->addRoute('/company', 'GET', function () {
+    Frame::setActiveItem(\App\Inc\Navigator::NAV_COMPANY);
+    $companyId = 1;
+    $companyController = new \App\Company\CompanyController();
+    $content = $companyController->renderCompany($companyId, false);
+
+    echo Frame::render($content);
+});
+
+$app->addRoute('/company/edit', 'GET', function () {
+    $companyId = 1;
+    $companyController = new \App\Company\CompanyController();
+    $content = $companyController->renderCompany($companyId, true);
+
+    echo Frame::render($content);
+});
+
+$app->addRoute('/company/edit', 'POST', function () {
     $companyController = new \App\Company\CompanyController();
     $companyController->saveCompany();
+    header('Location: /company');
 });
 
 $app->addRoute('/sql', 'GET', function () {
@@ -167,5 +185,6 @@ $app->addRoute('/sql', 'GET', function () {
 
     var_dump($result);
 });
+
 
 $app->run();

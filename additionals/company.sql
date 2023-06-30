@@ -25,10 +25,10 @@ CREATE TABLE `companies` (
                              `company_id` int(11) NOT NULL,
                              `name` varchar(255) NOT NULL,
                              `street` varchar(255) NOT NULL,
-                             `number` int(11) NOT NULL,
-                             `street-additional` varchar(255) NOT NULL,
+                             `street_additional` varchar(255) NOT NULL,
                              `zip` int(11) NOT NULL,
                              `city` varchar(255) NOT NULL,
+                             `country` varchar(255) NOT NULL,
                              `email` varchar(255) NOT NULL,
                              `phone` varchar(255) NOT NULL,
                              `description` varchar(1600) NOT NULL
@@ -38,8 +38,8 @@ CREATE TABLE `companies` (
 -- Daten für Tabelle `companies`
 --
 
-INSERT INTO `companies` (`company_id`, `name`, `street`, `number`, `street-additional`, `zip`, `city`, `email`, `phone`, `description`) VALUES
-    (1, 'Test-GmbH', 'Süderstraße', 77, 'c', 22175, 'Hamburg', 'test@company.de', '015252888135', 'Ich bin eine tolle company');
+INSERT INTO `companies` (`company_id`, `name`, `street`, `street_additional`, `zip`, `city`, `country`, `email`, `phone`, `description`) VALUES
+    (1, 'Test-GmbH', 'Süderstraße 77', 'c', 22175, 'Hamburg', 'Deutschland', 'test@company.de', '015252888135', 'Ich bin eine tolle company');
 
 --
 -- Indizes der exportierten Tabellen

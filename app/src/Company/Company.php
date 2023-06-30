@@ -7,13 +7,15 @@ class Company {
     private int $companyId;
     private string $companyName;
     private string $companyStreet;
-    private int $streetNumber;
     private string $companyStreetAdditional;
     private int $companyZip;
     private string $companyCity;
+    private string $companyCountry;
     private string $companyEmail;
     private string $companyPhone;
     private string $companyDescription;
+
+    public function __construct(){}
 
     /**
      * @return int
@@ -45,14 +47,6 @@ class Company {
     public function setCompanyStreet(string $companyStreet): void
     {
         $this->companyStreet = $companyStreet;
-    }
-
-    /**
-     * @param int $streetNumber
-     */
-    public function setStreetNumber(int $streetNumber): void
-    {
-        $this->streetNumber = $streetNumber;
     }
 
     /**
@@ -104,6 +98,14 @@ class Company {
     }
 
     /**
+     * @param string $companyCountry
+     */
+    public function setCompanyCountry(string $companyCountry): void
+    {
+        $this->companyCountry = $companyCountry;
+    }
+
+    /**
      * @return string
      */
     public function getCompanyName(): string
@@ -117,14 +119,6 @@ class Company {
     public function getCompanyStreet(): string
     {
         return $this->companyStreet;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStreetNumber(): int
-    {
-        return $this->streetNumber;
     }
 
     /**
@@ -174,4 +168,13 @@ class Company {
     {
         return $this->companyDescription;
     }
+
+    /**
+     * @return string
+     */
+    public function getCompanyCountry(): string
+    {
+        return $this->companyCountry;
+    }
+
 }

@@ -7,46 +7,75 @@ use \PDO;
 
 class CompanyRepository extends AbstractRepository {
 
-    public function getCompany(Company $company)
+    public function getCompany($companyId)
     {
         $stmt = $this->pdo->prepare('
-            SELECT * FROM companies
-            WHERE company_id = ?
+            SELECT 
+                 `company_id` AS companyId,
+                 `name` AS companyName,
+                 `street` AS companyStreet,
+                 `street_additional` AS companyStreetAdditional,
+                 `zip` AS companyZip,
+                 `city` AS companyCity,
+                 `country` AS companyCountry,
+                 `email` AS companyEmail,
+                 `phone` AS companyPhone,
+                 `description` AS companyDescription
+            FROM 
+                companies
+            WHERE 
+                company_id = ?
         ');
-        $stmt->execute([$company->getCompanyId()]);
-        return $stmt->fetchAll(PDO::FETCH_CLASS, Company::class);
+        $stmt->execute([$companyId]);
+        return $stmt->fetchObject(Company::class);
     }
 
-    public function saveCompany(Company $company)
+    public function updateCompany(Company $company)
     {
         $stmt = $this->pdo->prepare('
                 update companies set 
                     name = ?, 
                     street = ?,
-                    number = ?,
-                    street-additional = ?,
+                    street_additional = ?,
                     zip = ?,
                     city = ?,
+                    country = ?,
                     email = ?,
                     phone = ?,
                     description = ?                    
                 where 
-                    id = 1
-                IF @@ROWCOUNT = 0
-                   insert into companies(name, street, number, street-additional, zip, city, email, phone, description) 
-                          values(?, ?, ?, ?, ?, ?, ?, ?, ?);'
+                    company_id = 1'
         );
 
         $stmt->execute([
             $company->getCompanyName(),
             $company->getCompanyStreet(),
-            $company->getStreetNumber(),
             $company->getCompanyStreetAdditional(),
             $company->getCompanyZip(),
             $company->getCompanyCity(),
+            $company->getCompanyCountry(),
             $company->getCompanyEmail(),
             $company->getCompanyPhone(),
-            $company->getCompanyPhone()
+            $company->getCompanyDescription()
+        ]);
+    }
+
+    public function saveCompany(Company $company)
+    {
+        $stmt = $this->pdo->prepare('
+                insert into companies(name, street, street_additional, zip, city, country, email, phone, description) 
+                       values(?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE company_id = 1 ;'
+        );
+        $stmt->execute([
+            $company->getCompanyName(),
+            $company->getCompanyStreet(),
+            $company->getCompanyStreetAdditional(),
+            $company->getCompanyZip(),
+            $company->getCompanyCity(),
+            $company->getCompanyCountry(),
+            $company->getCompanyEmail(),
+            $company->getCompanyPhone(),
+            $company->getCompanyDescription()
         ]);
     }
 }
