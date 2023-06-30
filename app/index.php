@@ -94,10 +94,10 @@ $app->addRoute('/customers', 'GET', function () {
     $customerController = new CustomerController();
     $customers = $customerController->renderCustomer();
     $customerTable = new \App\Inc\View('customers/customerTable');
-//    Frame::addCssFile('customer.css');
+
     Frame::setActiveItem(\App\Inc\Navigator::NAV_CUSTOMERS);
+    Frame::addCssFile('customer.css');
     echo Frame::render($customerTable->render(['allCustomers' =>$customers]));
-    //require_once '/crm/app/src/Templates/customers/customerTable.php';
 });
 
 $app->addRoute('/customers/add', 'GET', function() {
