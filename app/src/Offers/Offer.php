@@ -2,6 +2,7 @@
 
 namespace App\Offers;
 
+use App\Company\Company;
 use App\Customers\Customer;
 
 class Offer
@@ -37,9 +38,9 @@ class Offer
         $this->customer = $customer;
     }
 
-    public function setCompany():void
+    public function setCompany(Company $company):void
     {
-
+        $this->company = $company;
     }
 
     public function setOfferPositions(array $positions):void
@@ -95,5 +96,9 @@ class Offer
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    public function setStatus($status):void {
+        $this->status = $status;
     }
 }

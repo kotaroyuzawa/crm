@@ -21,7 +21,7 @@ class Navigator {
         $this->items = [
             'customer' => [
                 'title' => 'Kunden',
-                'link' => '/customers'
+                'link' => 'customers'
             ],
             'offers' => [
                 'title' => 'Angebote',

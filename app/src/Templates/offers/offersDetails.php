@@ -3,6 +3,7 @@
  * @var \App\Positions\PositionRenderer $positionRenderer
  * @var \App\Offers\Offer $offer
  * @var string $customerInfo
+ * @var string $companyInfo
  */
 ?>
 <div class="container">
@@ -10,19 +11,12 @@
         <div class="col mt-2">
             <button class="btn btn-primary new-position" type="button" data-offer="<?= $offer->getOfferId() ?>">Neue Position</button>
         </div>
-        <form class="col mt-2"action="offers/save" method="POST">
-            <button value="<?=1?>" type="submit" name="offerID" class="btn btn-success">Angebot Speichern</button>
+        <form class="col mt-2"action="offers/update" method="POST">
+            <button value="<?= $offer->getOfferId() ?>" type="submit" name="offerID" class="btn btn-success">Angebot Bearbeiten</button>
         </form>
         <form class="col mt-2" action="offers/delete" method="POST">
             <button value="<?=$offer->getOfferId()?>" type="submit" name="deleteOffer" class="btn btn-danger">Löschen</button>
         </form>
-    </div>
-    <div id="offer_details">
-        <h2>Angebot Details: </h2>
-        <?= $offer->getOfferId()?>
-        <?= $offer->getStatus()?>
-        <?= $offer->getCreatedDate()?>
-
     </div>
     <div class="customer">
         <h2>Kunde:</h2>
@@ -30,6 +24,16 @@
     </div>
     <div class="company">
         <h2>Firma:</h2>
+        <?= $companyInfo ?>
+    </div>
+    <div id="offer_details">
+        <h2>Angebot Details: </h2>
+        Erstellt am: <?= $offer->getCreatedDate()?>
+        <br>
+        Angebot Status: <?= $offer->getStatus()?>
+        <br>
+        Angebot ID: <?= $offer->getOfferId()?>
+
     </div>
     <div class="positions">
         <h2>Positionen:</h2>

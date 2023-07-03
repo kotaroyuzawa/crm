@@ -68,17 +68,12 @@ class OfferRepository extends AbstractRepository
     public function updateOffer(Offer $offer): void
     {
         $stmt = $this->pdo->prepare('
-            UPDATE offers SET customer_id = ?, created_at = ?, deleted_at = ?, updated_at = ?, status = ?, sum = ?, positions = ? WHERE offer_id = ?
+            UPDATE offers SET status = ?, customer_id = ? WHERE offer_id = ?
         ');
 
         $stmt->execute([
-            $offer->getCustomerId(),
-            $offer->getCreatedDate(),
-            $offer->getDeletedDate(),
-            $offer->getUpdatedDate(),
             $offer->getStatus(),
-            $offer->getSum(),
-            $offer->getPositions(),
+            $offer->getCustomer()->getCustomerId(),
             $offer->getOfferId()
         ]);
     }
