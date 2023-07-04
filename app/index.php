@@ -15,6 +15,11 @@ $app->addRoute('URL', 'METHOD', function() {
 });
 */
 
+/**
+ *  Customers
+ */
+
+
 $app->addRoute('/', 'GET', function() {
 
     Frame::setActiveItem(\App\Inc\Navigator::NAV_CUSTOMERS);
@@ -103,9 +108,14 @@ $app->addRoute('/customers', 'GET', function () {
     $customers = $customerController->renderCustomer();
     $customerTable = new \App\Inc\View('customers/customerTable');
 
+    $view = new \App\Inc\View('confirmModal');
+
     Frame::setActiveItem(\App\Inc\Navigator::NAV_CUSTOMERS);
     Frame::addCssFile('customer.css');
-    echo Frame::render($customerTable->render(['allCustomers' =>$customers]));
+    Frame::addJsFile('jquery.js');
+    Frame::addJsFile('customers.js');
+    Frame::addJsFile('confirmModal.js');
+    echo Frame::render($customerTable->render(['allCustomers' =>$customers, 'modal' => $view]));
 });
 
 $app->addRoute('/customers/add', 'GET', function() {
@@ -120,9 +130,12 @@ $app->addRoute('/customers/add', 'POST', function() {
 });
 
 $app->addRoute('/customers/delete', 'POST', function() {
+    $customerId = $_POST['customerId'];
     $customerController = new CustomerController();
-    $customerController->deleteCustomer();
-    header('Location: /customers');
+    $customerController->deleteCustomer($customerId);
+
+    $view = new \App\Inc\View('json');
+    echo $view->render(['id' => $customerId]);
 });
 
 $app->addRoute('/customers/update', 'POST', function() {

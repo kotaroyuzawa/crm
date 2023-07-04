@@ -51,10 +51,8 @@ class CustomerController
         $customer->setCustomerId($lastCustomerId);
      }
 
-     public function deleteCustomer(): void
+     public function deleteCustomer(int $customerId): void
      {
-         $customerId = $_POST['customerId'];
-
          $this->customerRepo->deleteCustomer($customerId);
      }
 
