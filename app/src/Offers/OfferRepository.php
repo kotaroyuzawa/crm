@@ -87,6 +87,13 @@ class OfferRepository extends AbstractRepository
         $stmt->execute([$offerId]);
     }
 
+    public function createOffer(int $customerId)
+    {
+        return (new QueryBuilder($this->pdo))
+            ->table('offers')
+            ->insert(['customer_id' => $customerId]);
+    }
+
     public function getOfferIds(): array
     {
         $stmt = $this->pdo->prepare('

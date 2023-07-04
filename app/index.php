@@ -94,6 +94,7 @@ $app->addRoute('/offers/update', 'POST', function() {
 
 $app->addRoute('/offers/create', 'POST', function () {
     $offersController = new \App\Offers\OffersController();
+    $offersController->addOffer($_POST['customerId']);
 });
 
 $app->addRoute('/customers', 'GET', function () {

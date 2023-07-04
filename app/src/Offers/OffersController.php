@@ -71,6 +71,14 @@ class OffersController
         ]);
     }
 
+    public function addOffer(int $customerId): void
+    {
+        $offerRepository = new OfferRepository(Database::getConnection());
+        $offerId = $offerRepository->createOffer($customerId);
+
+        header('Location: /offers/details?offerID=' . $offerId);
+    }
+
     public function deleteOffer()
     {
         if(!empty($_POST['deleteOffer'])){
