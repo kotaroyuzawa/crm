@@ -7,7 +7,7 @@ use \PDO;
 
 class CompanyRepository extends AbstractRepository {
 
-    public function getCompany($companyId)
+    public function getCompany($companyId): Company
     {
         $stmt = $this->pdo->prepare('
             SELECT 

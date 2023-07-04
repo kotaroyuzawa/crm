@@ -1,7 +1,8 @@
 <a href="/customers/add"><button class="btn btn-primary">Neukunden anlegen</button></a>
 <form class="" action="/customers/delete" method="post">
 <input class="btn btn-primary" type="submit" value="Löschen">
-<input class="btn btn-primary" type="submit" formaction="customers/update" value="Update">
+<input class="btn btn-primary" type="submit" formaction="customers/update" value="Kunden Aktualisieren">
+<input class="btn btn-success" type="submit" formaction="offers/create" value="Neues Angebot erstellen">
 <div class="">
     <table class="table table-sm">
         <thead>

@@ -81,10 +81,16 @@ $app->addRoute('/offers/delete', 'POST', function() {
     echo $offersController->deleteOffer();
 });
 
-$app->addRoute('/offers/save', 'POST', function() {
+$app->addRoute('/offers/update', 'POST', function() {
+    $content = (new \App\Offers\OffersController())->updateOffer();
+
+    Frame::addJsFile('jquery.js');
+    echo Frame::render($content);
+});
+
+$app->addRoute('/offers/create', 'POST', function () {
     $offersController = new \App\Offers\OffersController();
 
-    echo $offersController->saveOffer();
 });
 
 
@@ -138,9 +144,9 @@ $app->addRoute('/customers/detail', 'GET', function() {
     echo Frame::render($customerDetail->render(['customer' => $customerById]));
 });
 
-$app->addRoute('/company', 'GET', function () {
+/*$app->addRoute('/company', 'GET', function () {
     echo (new \App\Company\CompanyController())->index();
-});
+});*/
 
 $app->addRoute('/company', 'GET', function () {
     Frame::setActiveItem(\App\Inc\Navigator::NAV_COMPANY);
