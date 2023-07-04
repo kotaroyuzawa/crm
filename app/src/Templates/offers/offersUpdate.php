@@ -6,7 +6,7 @@
  */
 ?>
 <div class="container">
-    <form action="offers/details" method="POST">
+    <form action="offers/update" method="POST">
         <div class="mb-3">
             <label for="status" class="form-label">Status</label>
             <select id="status" name="status" class="form-select" label="Default select example">
@@ -23,6 +23,6 @@
                 <?php endforeach; ?>
             </select>
         </div>
-        <button type="submit" value="1" name="offerID" class="btn btn-primary">Speichern</button>
+        <button type="submit" value="<?= $offer->getOfferId(); ?>" name="offerID" class="btn btn-primary">Speichern</button>
     </form>
 </div>

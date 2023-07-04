@@ -73,7 +73,7 @@ class OfferRepository extends AbstractRepository
 
         $stmt->execute([
             $offer->getStatus(),
-            $offer->getCustomer()->getCustomerId(),
+            $offer->getCustomerId(),
             $offer->getOfferId()
         ]);
     }

@@ -57,7 +57,7 @@
                 <?=$offer->getSum()?>
             </td>
             <td>
-                <form action="offers/details" method="POST">
+                <form action="offers/details?offerID=<?=$offer->getOfferId()?>" method="GET">
                     <button value="<?=$offer->getOfferId()?>" type="submit" name="offerID" class="btn btn-light">Details</button>
                 </form>
             </td>

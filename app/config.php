@@ -10,3 +10,5 @@ const PDO_HOST = 'db';
 const PDO_DBNAME = 'crm';
 const PDO_USER = 'root';
 const PDO_PASSWORD = 'mysql';
+
+const COMPANY_ID = 1;

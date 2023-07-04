@@ -14,7 +14,7 @@ class App {
 
     public function run (): void
     {
-        $url = $_SERVER['REQUEST_URI'];
+        $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
         if (!empty($this->routes[$url][$method])){
             $callback = $this->routes[$url][$method];

@@ -11,7 +11,7 @@
         <div class="col mt-2">
             <button class="btn btn-primary new-position" type="button" data-offer="<?= $offer->getOfferId() ?>">Neue Position</button>
         </div>
-        <form class="col mt-2"action="offers/update" method="POST">
+        <form class="col mt-2"action="offers/update?id=<?= $offer->getOfferId() ?>" method="GET">
             <button value="<?= $offer->getOfferId() ?>" type="submit" name="offerID" class="btn btn-success">Angebot Bearbeiten</button>
         </form>
         <form class="col mt-2" action="offers/delete" method="POST">

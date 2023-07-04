@@ -73,6 +73,11 @@ class Offer
         return $this->positions;
     }
 
+    public function addPositions(array $positions): void
+    {
+        $this->positions = $positions;
+    }
+
     public function getSum(): int
     {
         return $this->sum;

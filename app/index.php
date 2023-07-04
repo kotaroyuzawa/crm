@@ -64,10 +64,10 @@ $app->addRoute('/offers/filter', 'POST', function() {
     echo (new \App\Offers\OffersController())->getFilteredIndex();
 });
 
-$app->addRoute('/offers/details', 'POST', function() {
+$app->addRoute('/offers/details', 'GET', function() {
     $modal = new \App\Inc\View('positions/modal');
 
-    $content = (new \App\Offers\OffersController())->details();
+    $content = (new \App\Offers\OffersController())->details($_GET['offerID']);
     $content .= $modal->render([]);
 
     Frame::addJsFile('jquery.js');
@@ -81,19 +81,20 @@ $app->addRoute('/offers/delete', 'POST', function() {
     echo $offersController->deleteOffer();
 });
 
-$app->addRoute('/offers/update', 'POST', function() {
-    $content = (new \App\Offers\OffersController())->updateOffer();
+$app->addRoute('/offers/update', 'GET', function() {
+    $content = (new \App\Offers\OffersController())->updateOffer($_GET['offerID']);
 
     Frame::addJsFile('jquery.js');
     echo Frame::render($content);
 });
 
-$app->addRoute('/offers/create', 'POST', function () {
-    $offersController = new \App\Offers\OffersController();
-
+$app->addRoute('/offers/update', 'POST', function() {
+    (new \App\Offers\OffersController())->saveChanges($_POST['offerID'], $_POST['customerID'], $_POST['status']);
 });
 
-
+$app->addRoute('/offers/create', 'POST', function () {
+    $offersController = new \App\Offers\OffersController();
+});
 
 $app->addRoute('/customers', 'GET', function () {
 
