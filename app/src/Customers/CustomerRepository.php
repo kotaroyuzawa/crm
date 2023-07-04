@@ -3,6 +3,7 @@
 namespace App\Customers;
 
 use App\Inc\AbstractRepository;
+use App\Inc\QueryBuilder;
 use PDO;
 class CustomerRepository extends AbstractRepository
 {
@@ -16,7 +17,7 @@ class CustomerRepository extends AbstractRepository
     public function getAllCustomers(): array
     {
         try {
-            $sql = 'SELECT * FROM customers';
+            $sql = 'SELECT * FROM customers WHERE active = 1';
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_CLASS, Customer::class );
@@ -66,14 +67,10 @@ class CustomerRepository extends AbstractRepository
 
     public function deleteCustomer($customerId): void
     {
-        try {
-            $sql = 'DELETE FROM customers WHERE customerId = :customerId';
-            $stm = $this->pdo->prepare($sql);
-            $stm->bindParam(':customerId', $customerId);
-            $stm->execute();
-        } catch (\Exception $e) {
-            throw new $e->getMessage();
-        }
+        (new QueryBuilder($this->pdo))
+            ->table('customers')
+            ->addWhere('customerId = ?', [$customerId])
+            ->update(['active' => 0]);
     }
 
     public function updateCustomer(Customer $customer): void
