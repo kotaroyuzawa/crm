@@ -4,6 +4,8 @@ namespace App\Offers;
 
 use App\Inc\AbstractRepository;
 use App\Inc\QueryBuilder;
+use DateTime;
+use DateTimeZone;
 use PDO;
 
 class OfferRepository extends AbstractRepository
@@ -38,6 +40,8 @@ class OfferRepository extends AbstractRepository
                 sum AS sum
             FROM
                 offers
+            WHERE
+                deleted_at = "0000-00-00 00:00:00"
         ');
 
         $stmt->execute();
@@ -80,11 +84,10 @@ class OfferRepository extends AbstractRepository
 
     public function deleteOffer(int $offerId): void
     {
-        $stmt = $this->pdo->prepare('
-            DELETE FROM offers WHERE offer_id = ?
-        ');
-
-        $stmt->execute([$offerId]);
+        (new QueryBuilder($this->pdo))
+            ->table('offers')
+            ->addWhere('offer_id = ?', [$offerId])
+            ->update(['deleted_at' => $this->getDeleteTime()]);
     }
 
     public function createOffer(int $customerId)
@@ -101,6 +104,14 @@ class OfferRepository extends AbstractRepository
             UPDATE offers SET `sum` = (SELECT sum(price * amount) FROM positions WHERE offer_id = @offerId) WHERE offer_id = @offerId 
         ');
         $stmt->execute([$offerId]);
+    }
+
+    public function deleteAllOffersFromCustomer(int $customerId): void
+    {
+        (new QueryBuilder($this->pdo))
+            ->table('offers')
+            ->addWhere('customer_id = ?', [$customerId])
+            ->update(['deleted_at' => $this->getDeleteTime()]);
     }
 
     public function getOfferIds(): array
@@ -124,5 +135,11 @@ class OfferRepository extends AbstractRepository
     public function getObjects()
     {
         return $this->queryBuilder->getObjects(Offer::class);
+    }
+
+    private function getDeleteTime(): string
+    {
+        $dt = new DateTime('now', new DateTimeZone(TIMEZONE));
+        return $dt->format('Y-m-d H:i:s');
     }
 }

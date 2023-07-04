@@ -12,3 +12,4 @@ const PDO_USER = 'root';
 const PDO_PASSWORD = 'mysql';
 
 const COMPANY_ID = 1;
+const TIMEZONE = 'Europe/Berlin';

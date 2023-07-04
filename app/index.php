@@ -134,6 +134,9 @@ $app->addRoute('/customers/delete', 'POST', function() {
     $customerController = new CustomerController();
     $customerController->deleteCustomer($customerId);
 
+    $offersRepo = new \App\Offers\OfferRepository(\App\Inc\Database::getConnection());
+    $offersRepo->deleteAllOffersFromCustomer($customerId);
+
     $view = new \App\Inc\View('json');
     echo $view->render(['id' => $customerId]);
 });
@@ -185,27 +188,5 @@ $app->addRoute('/company/edit', 'POST', function () {
     $companyController->saveCompany();
     header('Location: /company');
 });
-
-$app->addRoute('/sql', 'GET', function () {
-
-    $builder = (new \App\Inc\QueryBuilder(\App\Inc\Database::getConnection()))
-        ->table('positions')
-        ->select([
-            'position_id AS positionId',
-            'offer_id AS offerId',
-            'name',
-            'details',
-            'price',
-            'amount'
-        ])
-        ->addWhere('offer_id = ?', [2]);
-
-    $result = $builder
-        ->addWhere('price >= ?', [500])
-        ->getObjects(\App\Positions\Position::class);
-
-    var_dump($result);
-});
-
 
 $app->run();
