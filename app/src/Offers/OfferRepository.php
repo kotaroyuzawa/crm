@@ -94,6 +94,15 @@ class OfferRepository extends AbstractRepository
             ->insert(['customer_id' => $customerId]);
     }
 
+    public function updateSum(int $offerId): void
+    {
+        $stmt = $this->pdo->prepare('
+            SET @offerId = ?;
+            UPDATE offers SET `sum` = (SELECT sum(price * amount) FROM positions WHERE offer_id = @offerId) WHERE offer_id = @offerId 
+        ');
+        $stmt->execute([$offerId]);
+    }
+
     public function getOfferIds(): array
     {
         $stmt = $this->pdo->prepare('

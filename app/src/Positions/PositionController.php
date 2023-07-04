@@ -4,6 +4,7 @@ namespace App\Positions;
 
 use App\Inc\Database;
 use App\Inc\View;
+use App\Offers\OfferRepository;
 
 class PositionController {
 
@@ -48,6 +49,9 @@ class PositionController {
         } else {
             $positionRepository->updatePosition($position);
         }
+
+        $offerRepository = new OfferRepository(Database::getConnection());
+        $offerRepository->updateSum($position->getOfferId());
 
         return (new View('json'))->render([
             'id' => $position->getPositionId(),
