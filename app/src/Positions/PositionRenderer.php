@@ -18,9 +18,14 @@ class PositionRenderer {
 
     private function renderSum(Position $position): string
     {
-        $sum = $position->getAmount() * $position->getPrice();
-        return $this->renderPrice($sum);
+        return $this->renderPrice($position->getSum());
     }
+
+    private function renderTax(Position $position): string
+    {
+        return $this->renderPrice($position->getSum() / (1 + $position->getTax()) * $position->getTax());
+    }
+
 
     private function renderAttributes(Position $position): string
     {
@@ -43,6 +48,7 @@ class PositionRenderer {
 
     public function renderPosition(Position $position): string
     {
+        $baseSum = $position->getSum();
         return <<<HTML
 <div class="mt-2 border position p-2" {$this->renderAttributes($position)}>
     <div class="row">
@@ -52,6 +58,7 @@ class PositionRenderer {
         </div>
         <div class="col-4 text-end">
             <h4>{$this->renderSum($position)}</h4>
+            <p>USt: {$this->renderTax($position)}</p>
             <p>{$position->getAmount()} x {$this->renderPrice($position->getPrice())}</p>
         </div>
     </div>

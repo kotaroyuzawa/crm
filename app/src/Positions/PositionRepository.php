@@ -22,7 +22,12 @@ class PositionRepository {
                 name,
                 details,
                 price,
-                amount
+                amount,
+                handle_cost AS handleCost,
+                profit,
+                tax,
+                skonto,
+                discount
             FROM
                 positions
             WHERE
