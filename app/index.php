@@ -189,4 +189,24 @@ $app->addRoute('/company/edit', 'POST', function () {
     header('Location: /company');
 });
 
+$app->addRoute('/login', 'GET', function () {
+    $view = new \App\Inc\View('users/login');
+    echo $view->render([]);
+});
+
+$app->addRoute('/login', 'POST', function () {
+    $authService = new \App\Inc\AuthService(\App\Inc\Database::getConnection());
+    if($authService->handleLogin($_POST['email'], $_POST['password'])){
+        header('Location: /offers');
+    } else {
+        header('Location: /login');
+    }
+});
+
+$app->addRoute('/logout', 'GET', function () {
+    $authService = new \App\Inc\AuthService(\App\Inc\Database::getConnection());
+    $authService->logout();
+    header('Location: /login');
+});
+
 $app->run();

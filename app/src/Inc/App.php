@@ -16,6 +16,16 @@ class App {
     {
         $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
+
+        if ($url != '/login' && $method != 'POST') {
+            $authService = new AuthService(Database::getConnection());
+
+            if (!$authService->isLoggedIn()) {
+                $url = '/login';
+                $method = 'GET';
+            }
+        }
+
         if (!empty($this->routes[$url][$method])){
             $callback = $this->routes[$url][$method];
             if (is_callable($callback)) {

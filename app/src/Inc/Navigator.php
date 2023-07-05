@@ -33,7 +33,7 @@ class Navigator {
             ],
             'logout' => [
                 'title' => 'Logout',
-                'link' => ''
+                'link' => '/logout'
             ]
         ];
     }
