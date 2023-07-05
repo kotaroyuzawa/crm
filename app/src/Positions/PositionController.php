@@ -28,6 +28,10 @@ class PositionController {
         $details = $_POST['position-details'] ?? '';
         $price = $_POST['position-price'] ?? '';
         $amount = $_POST['position-amount'] ?? '';
+        $handlecost = $_POST['handle-cost'] ?? 0;
+        $profit = $_POST['position-profit'] ?? 0;
+        $skonto = $_POST['skonto'] ?? 0;
+        $discount = $_POST['discount'] ?? 0;
 
         if (empty($offerId) || empty($name) || empty($details) || empty($price) || empty($amount)) {
             return;
@@ -40,6 +44,10 @@ class PositionController {
         $position->setDetails($details);
         $position->setPrice($price);
         $position->setAmount($amount);
+        $position->setHandleCost($handlecost);
+        $position->setProfit($profit);
+        $position->setSkonto($skonto);
+        $position->setDiscount($discount);
 
         $positionRepository = new PositionRepository(Database::getConnection());
 

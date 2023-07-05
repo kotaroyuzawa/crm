@@ -23,6 +23,10 @@ positions = {
         $('#position-amount').val(position.data('amount'));
         $('#position-id').val(position.data('id'));
         $('#offer-id').val(position.data('offer'));
+        $('#handle-cost').val(position.data('handlecost'));
+        $('#position-profit').val(position.data('profit'));
+        $('#skonto').val(position.data('skonto'));
+        $('#discount').val(position.data('discount'));
         $('#position-modal').modal('show');
     },
 

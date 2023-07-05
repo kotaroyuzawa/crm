@@ -16,17 +16,6 @@ class PositionRenderer {
         return number_format($price, 2, ',', '.') . '€';
     }
 
-    private function renderSum(Position $position): string
-    {
-        return $this->renderPrice($position->getSum());
-    }
-
-    private function renderTax(Position $position): string
-    {
-        return $this->renderPrice($position->getSum() / (1 + $position->getTax()) * $position->getTax());
-    }
-
-
     private function renderAttributes(Position $position): string
     {
         $attributes = [
@@ -35,7 +24,11 @@ class PositionRenderer {
             'name' => $position->getName(),
             'details' => $position->getDetails(),
             'price' => $position->getPrice(),
-            'amount' => $position->getAmount()
+            'amount' => $position->getAmount(),
+            'handlecost' => $position->getHandleCost(),
+            'profit' => $position->getProfit(),
+            'skonto' => $position->getSkonto(),
+            'discount' => $position->getDiscount()
         ];
 
         $string = '';
@@ -44,6 +37,11 @@ class PositionRenderer {
         }
 
         return $string;
+    }
+
+    private function renderPercent(float $value)
+    {
+        return 100 * $value;
     }
 
     public function renderPosition(Position $position): string

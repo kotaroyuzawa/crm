@@ -201,10 +201,18 @@ class Position {
 
     public function getSum(): float
     {
-        $handeCost =  ($this->handleCost + 1);
-        $profit = ($this->profit + 1);
+        $handleCost =  ($this->handleCost / 100 + 1);
+        $profit = ($this->profit / 100 + 1);
 
-        return $this->price * $this->amount * $handeCost * $profit;
+        $sum = $this->price * $this->amount * $handleCost * $profit;
+
+        //skonto
+        $sum = ($sum / (100 - $this->skonto ) * $this->skonto) + $sum;
+
+        // discount
+        $sum = ($sum / (100 - $this->discount) * $this->discount) + $sum;
+
+        return $sum;
     }
 
 }

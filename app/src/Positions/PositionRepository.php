@@ -41,28 +41,36 @@ class PositionRepository {
     public function savePosition(Position $position): void
     {
         $stmt = $this->pdo->prepare('
-            INSERT INTO positions (offer_id, name, details, price, amount) VALUES (?, ?, ?, ?, ?);
+            INSERT INTO positions (offer_id, name, details, price, amount, handle_cost, profit, skonto, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
         ');
         $stmt->execute([
            $position->getOfferId(),
            $position->getName(),
            $position->getDetails(),
            $position->getPrice(),
-           $position->getAmount()
+           $position->getAmount(),
+           $position->getHandleCost(),
+           $position->getProfit(),
+           $position->getSkonto(),
+           $position->getDiscount()
         ]);
     }
 
     public function updatePosition(Position $position): void
     {
         $stmt = $this->pdo->prepare('
-            UPDATE positions SET name = ?, details = ?, price = ?, amount = ? WHERE position_id = ?
+            UPDATE positions SET name = ?, details = ?, price = ?, amount = ?, handle_cost = ?, profit = ?, skonto = ?, discount = ? WHERE position_id = ?
         ');
         $stmt->execute([
             $position->getName(),
             $position->getDetails(),
             $position->getPrice(),
             $position->getAmount(),
-            $position->getPositionId()
+            $position->getPositionId(),
+            $position->getHandleCost(),
+            $position->getProfit(),
+            $position->getSkonto(),
+            $position->getDiscount()
         ]);
     }
 

@@ -67,7 +67,7 @@
                                                     patter="[0-9]+([\.,][0-9]+)?" step="0.01">
                                             </div>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-6">
                                             <div class="mb-3">
                                                 <label for="position-profit" class="form-label">Gewinn (%)</label>
                                                 <input
@@ -75,17 +75,6 @@
                                                     class="form-control"
                                                     id="position-profit"
                                                     name="position-profit"
-                                                    patter="[0-9]+([\.,][0-9]+)?" step="0.01">
-                                            </div>
-                                        </div>
-                                        <div class="col-3">
-                                            <div class="mb-3">
-                                                <label for="position-tax" class="form-label">USt (%)</label>
-                                                <input
-                                                    type="number"
-                                                    class="form-control"
-                                                    id="position-tax"
-                                                    name="position-tax"
                                                     patter="[0-9]+([\.,][0-9]+)?" step="0.01">
                                             </div>
                                         </div>
