@@ -78,7 +78,7 @@ class Offer
         $this->positions = $positions;
     }
 
-    public function getSum(): int
+    public function getSum(): float
     {
         return $this->sum;
     }
