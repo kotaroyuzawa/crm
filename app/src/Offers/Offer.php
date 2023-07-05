@@ -13,7 +13,7 @@ class Offer
     private string $deletedAt;
     private string $updatedAt;
     private string $status = 'Inactive';
-    private int $sum;
+    private float $sum;
     public Customer $customer;
     public Company $company;
     public array $positions;
