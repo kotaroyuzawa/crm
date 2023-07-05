@@ -50,16 +50,28 @@ class PositionRenderer {
     {
         $baseSum = $position->getSum();
         return <<<HTML
-<div class="mt-2 border position p-2" {$this->renderAttributes($position)}>
-    <div class="row">
-        <div class="col-8">
-            <h3>{$position->getName()}</h3>
-            <p>Details: {$position->getDetails()} </p>
+<div class="border-bottom position p-2" {$this->renderAttributes($position)}>
+    <div class="row text-end">
+        <div class="col-2">
+            {$position->getName()}
         </div>
-        <div class="col-4 text-end">
-            <h4>{$this->renderSum($position)}</h4>
-            <p>USt: {$this->renderTax($position)}</p>
-            <p>{$position->getAmount()} x {$this->renderPrice($position->getPrice())}</p>
+        <div class="col-4">
+            {$position->getDetails()}
+        </div>
+        <div class="col-1">
+            {$position->getAmount()}x
+        </div>
+        <div class="col-1">
+            {$this->renderPrice($position->getPrice())}
+        </div>
+        <div class="col-1">
+            {$position->getSkonto()}%
+        </div>
+        <div class="col-1">
+            {$position->getDiscount()}%
+        </div>
+        <div class="col-1">
+            {$this->renderPrice($position->getSum())}
         </div>
     </div>
 </div>

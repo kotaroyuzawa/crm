@@ -38,6 +38,29 @@
     <div class="positions">
         <h2>Positionen:</h2>
         <div id="position-list">
+            <div class="row text-end mt-3 border-bottom">
+                <div class="col-2">
+                    <h5>Name</h5>
+                </div>
+                <div class="col-4">
+                    <h5>Details</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Anzahl</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Preis</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Skonto</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Rabatt</h5>
+                </div>
+                <div class="col-1">
+                    <h5>Gesamt</h5>
+                </div>
+            </div>
             <?= $positionRenderer->renderList() ?>
         </div>
     </div>
