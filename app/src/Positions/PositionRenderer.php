@@ -55,7 +55,7 @@ class PositionRenderer {
         <div class="col-2">
             {$position->getName()}
         </div>
-        <div class="col-4">
+        <div class="col-5">
             {$position->getDetails()}
         </div>
         <div class="col-1">

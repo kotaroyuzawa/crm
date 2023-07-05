@@ -7,16 +7,18 @@
  */
 ?>
 <div class="container">
-    <div class="row">
-        <div class="col mt-2">
-            <button class="btn btn-primary new-position" type="button" data-offer="<?= $offer->getOfferId() ?>">Neue Position</button>
+    <div class="sticky-top">
+        <div class="row  bg-white">
+            <div class="col mt-2">
+                <button class="btn btn-primary new-position" type="button" data-offer="<?= $offer->getOfferId() ?>">Neue Position</button>
+            </div>
+            <form class="col mt-2"action="offers/update?id=<?= $offer->getOfferId() ?>" method="GET">
+                <button value="<?= $offer->getOfferId() ?>" type="submit" name="offerID" class="btn btn-success">Angebot Bearbeiten</button>
+            </form>
+            <form class="col mt-2" action="offers/delete" method="POST">
+                <button value="<?=$offer->getOfferId()?>" type="submit" name="deleteOffer" class="btn btn-danger">Löschen</button>
+            </form>
         </div>
-        <form class="col mt-2"action="offers/update?id=<?= $offer->getOfferId() ?>" method="GET">
-            <button value="<?= $offer->getOfferId() ?>" type="submit" name="offerID" class="btn btn-success">Angebot Bearbeiten</button>
-        </form>
-        <form class="col mt-2" action="offers/delete" method="POST">
-            <button value="<?=$offer->getOfferId()?>" type="submit" name="deleteOffer" class="btn btn-danger">Löschen</button>
-        </form>
     </div>
     <div class="customer">
         <h2>Kunde:</h2>
@@ -42,7 +44,7 @@
                 <div class="col-2">
                     <h5>Name</h5>
                 </div>
-                <div class="col-4">
+                <div class="col-5">
                     <h5>Details</h5>
                 </div>
                 <div class="col-1">
