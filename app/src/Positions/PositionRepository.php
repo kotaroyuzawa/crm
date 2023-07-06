@@ -66,11 +66,11 @@ class PositionRepository {
             $position->getDetails(),
             $position->getPrice(),
             $position->getAmount(),
-            $position->getPositionId(),
             $position->getHandleCost(),
             $position->getProfit(),
             $position->getSkonto(),
-            $position->getDiscount()
+            $position->getDiscount(),
+            $position->getPositionId()
         ]);
     }
 
